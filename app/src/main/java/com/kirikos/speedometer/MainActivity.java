@@ -1,37 +1,48 @@
 package com.kirikos.speedometer;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.slider.Slider;
 import com.kirikos.speedometer.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        BottomNavigationView btv = findViewById(R.id.nav_view);
+        btv.setSelectedItemId(R.id.speed_menu);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_history, R.id.navigation_speed, R.id.navigation_settings)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        btv.setOnItemSelectedListener(item -> {
+           if (item.getItemId() == R.id.speed_menu) {
+               return true;
+           } else if (item.getItemId() == R.id.settings_menu) {
+               startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+               finish();
+               return true;
+           } else if (item.getItemId() == R.id.history_menu) {
+               startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
+               finish();
+               return true;
+           }
+           return false;
+        });
     }
-
 }
