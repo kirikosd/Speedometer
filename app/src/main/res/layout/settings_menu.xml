@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="112dp"
-            android:text="Speed Limit"
+            android:text="@string/settings_speed_limit_text"
             android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="0"
+            android:text="@string/settings_speed_limit_initial"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/slider"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,29 +53,30 @@
             android:valueTo="250"
             android:stepSize="1"
             app:labelBehavior="gone"
+            android:contentDescription="@string/slider_description"
             app:layout_constraintBottom_toTopOf="@+id/btn_apply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_apply"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:text="Apply"
+            android:text="@string/button_apply"
             app:layout_constraintBottom_toTopOf="@+id/btn_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_cancel"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="60dp"
-            android:text="Cancel"
+            android:text="@string/button_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

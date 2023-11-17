@@ -6,15 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.slider.Slider;
 
 public class SettingsActivity extends AppCompatActivity {
+    SharedPreferences preferences;
     TextView sliderVal;
     Slider slider;
+    Button btnApply;
+    Button btnCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +43,13 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         });
 
-
-        Button btnApply = findViewById(R.id.btn_apply);
-        Button btnCancel = findViewById(R.id.btn_cancel);
-
-        SharedPreferences sp = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-
+        preferences = getPreferences(MODE_PRIVATE);
         sliderVal = findViewById(R.id.slider_val);
         slider = findViewById(R.id.slider);
-        slider.setValue(80);
+        slider.setValue(preferences.getFloat("slider",0));
+        sliderVal.setText(Float.toString(preferences.getFloat("slider",0)));
+        btnApply = findViewById(R.id.btn_apply);
+        btnCancel = findViewById(R.id.btn_cancel);
 
         slider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
@@ -55,24 +58,23 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        //        Shared Preferences Code
-//        Button btn_apply = findViewById(R.id.btn_apply);
-//        btn_apply.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("unit", unit_variable);
-//                etc...
-//                editor.apply();
-//                successful toast message
-//            }
-//        });
-//
-//        reading from shared preferances
-//        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-//        String unit_variable;
-//        unit_variable = sharedPreferences.getString("unit","");
-//        unitTextbox = setText(unit_variable) ;
+        //  Shared Preferences Code
+        btnApply.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("slider",slider.toString());
+                //editor.putString("key2",editText3.getText().toString());
+                editor.apply();
+                Toast.makeText(getApplicationContext(), "Changes Saved" , Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SpeedActivity.class));
+                Toast.makeText(getApplicationContext(), "No changes made", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

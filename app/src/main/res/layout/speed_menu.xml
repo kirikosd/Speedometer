@@ -20,8 +20,8 @@
             android:id="@+id/text_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0"
             android:textAlignment="center"
+            android:text="@string/initial_speed"
             android:textSize="200sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +34,19 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="km/h"
+            android:text="@string/kilometers_per_hour"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_dashboard"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/initial_location" />
 
     </LinearLayout>
 
