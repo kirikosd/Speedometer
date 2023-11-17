@@ -1,8 +1,9 @@
 package com.kirikos.speedometer;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
     Slider slider;
     Button btnApply;
     Button btnCancel;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,38 +45,26 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         });
 
-        preferences = getPreferences(MODE_PRIVATE);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         sliderVal = findViewById(R.id.slider_val);
         slider = findViewById(R.id.slider);
-        slider.setValue(preferences.getFloat("slider",0));
-        sliderVal.setText(Float.toString(preferences.getFloat("slider",0)));
+        slider.setValue(Float.valueOf(preferences.getString("slider","0")));
+        sliderVal.setText(Float.toString(slider.getValue()));
         btnApply = findViewById(R.id.btn_apply);
         btnCancel = findViewById(R.id.btn_cancel);
 
-        slider.addOnChangeListener(new Slider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                sliderVal.setText(Float.toString(value));
-            }
-        });
-
-        //  Shared Preferences Code
-        btnApply.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("slider",slider.toString());
-                //editor.putString("key2",editText3.getText().toString());
-                editor.apply();
-                Toast.makeText(getApplicationContext(), "Changes Saved" , Toast.LENGTH_SHORT).show();
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SpeedActivity.class));
-                Toast.makeText(getApplicationContext(), "No changes made", Toast.LENGTH_SHORT).show();
-            }
-        });
+        slider.addOnChangeListener((slider, value, fromUser) -> sliderVal.setText(Float.toString(value)));
     }
+    public void save(View view){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("slider",Float.toString(slider.getValue()));
+//        editor.putString("key2",editText3.getText().toString());
+        editor.apply();
+        Toast.makeText(getApplicationContext(), "Changes Saved" , Toast.LENGTH_SHORT).show();
+    }
+    public void cancel(View view){
+        startActivity(new Intent(getApplicationContext(), SpeedActivity.class));
+        Toast.makeText(getApplicationContext(), "No changes made", Toast.LENGTH_SHORT).show();
+    }
+
 }

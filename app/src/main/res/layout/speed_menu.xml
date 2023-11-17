@@ -8,6 +8,7 @@
     tools:context=".SpeedActivity">
 
     <LinearLayout
+        android:id="@+id/speedometer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -17,11 +18,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/warning"
+            android:textSize="25sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+        <TextView
             android:id="@+id/text_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:text="@string/initial_speed"
+            android:textAlignment="center"
             android:textSize="200sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,14 +51,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_dashboard"/>
+            app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/initial_location" />
+            android:text="@string/initial_location"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

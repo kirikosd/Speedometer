@@ -11,6 +11,10 @@
     <string name="button_apply">Apply</string>
     <string name="button_cancel">Cancel</string>
     <string name="slider_description">Specify speed limit</string>
+    <string name="warning">SPEED LIMIT EXCEEDED.SLOW DOWN</string>
+    <string name="db_table_timestamp">Timestamp</string>
+    <string name="db_table_speed">Speed</string>
+    <string name="db_table_location">Location</string>
 
 
     <!-- Preference Titles -->
